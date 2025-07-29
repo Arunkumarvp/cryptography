@@ -1,39 +1,50 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 
+void encrypt(char *input, char *output, int shift) {
+    int i;
+    for (i = 0; input[i] != '\0'; i++) {
+        if (input[i] >= 'a' && input[i] <= 'z') {
+            output[i] = (input[i] - 'a' + shift) % 26 + 'a';
+        } else if (input[i] >= 'A' && input[i] <= 'Z') {
+            output[i] = (input[i] - 'A' + shift) % 26 + 'A';
+        } else {
+            output[i] = input[i];
+        }
+    }
+    output[i] = '\0';
+}
 
-int main(){
-    char str[100];
-    int shift, i;
-    // Input string and shift value
+void decrypt(char *input, char *output, int shift) {
+    int i;
+    for (i = 0; input[i] != '\0'; i++) {
+        if (input[i] >= 'a' && input[i] <= 'z') {
+            output[i] = (input[i] - 'a' - shift + 26) % 26 + 'a';
+        } else if (input[i] >= 'A' && input[i] <= 'Z') {
+            output[i] = (input[i] - 'A' - shift + 26) % 26 + 'A';
+        } else {
+            output[i] = input[i];
+        }
+    }
+    output[i] = '\0';
+}
+
+int main() {
+    char str[100], encrypted[100], decrypted[100];
+    int shift;
     printf("Shift Cipher Encryption and Decryption\n");
     printf("Enter the string to encrypt: \n");
-    // Using fgets to read the string to handle spaces
-    // and avoid buffer overflow
-    // Note: fgets includes the newline character, which we will handle later
-    fgets(str,sizeof(str),stdin);
-    // key for shift cipher for encryption and decryption
+    fgets(str, sizeof(str), stdin);
+    // Remove newline if present
+    str[strcspn(str, "\n")] = '\0';
     printf("Enter the shift value: \n");
-    scanf("%d",&shift);
+    scanf("%d", &shift);
 
-    int len = strlen(str);
-    for(i = 0; i < len; i++){
-        if(str[i] >= 'a' && str[i] <= 'z'){
-            str[i] = (str[i] - 'a' + shift) % 26 + 'a';
-        }
-        else if(str[i] >= 'A' && str[i] <= 'Z'){
-            str[i] = (str[i] - 'A' + shift) % 26 + 'A';
-        }
-    }
-    printf("Encrypted string: %s\n", str);
-    for(i = 0; i < len; i++){
-        if(str[i] >= 'a' && str[i] <= 'z'){
-            str[i] = (str[i] - 'a' - shift + 26) % 26 + 'a';
-        }
-        else if(str[i] >= 'A' && str[i] <= 'Z'){
-            str[i] = (str[i] - 'A' - shift + 26) % 26 + 'A';
-        }
-    }
-    printf("Decrypted string: %s\n", str);
+    encrypt(str, encrypted, shift);
+    printf("Encrypted string: %s\n", encrypted);
+
+    decrypt(encrypted, decrypted, shift);
+    printf("Decrypted string: %s\n", decrypted);
+
     return 0;
 }
