@@ -1,3 +1,47 @@
+/*
+ * Shift Cipher Encryption and Decryption
+ *
+ * This program implements a simple shift cipher (Caesar cipher) for encrypting and decrypting strings.
+ * It supports both uppercase and lowercase English letters, preserving non-alphabetic characters.
+ */
+
+/**
+ * Encrypts the input string using a shift cipher (Caesar cipher).
+ *
+ * @param input   The original string to encrypt.
+ * @param output  The buffer to store the encrypted string (should be large enough).
+ * @param shift   The number of positions to shift each alphabetic character represent as key.
+ *
+ * Summary:
+ *   Iterates through each character of the input string. If the character is an uppercase or lowercase
+ *   letter, it shifts it by the specified amount, wrapping around the alphabet if necessary.
+ *   Non-alphabetic characters are copied unchanged.
+ */
+void encrypt(char *input, char *output, int shift);
+
+/**
+ * Decrypts the input string that was encrypted using a shift cipher.
+ *
+ * @param input   The encrypted string to decrypt.
+ * @param output  The buffer to store the decrypted string (should be large enough).
+ * @param shift   The number of positions the original string was shifted.
+ *
+ * Summary:
+ *   Iterates through each character of the input string. If the character is an uppercase or lowercase
+ *   letter, it shifts it backwards by the specified amount, wrapping around the alphabet if necessary.
+ *   Non-alphabetic characters are copied unchanged.
+ */
+void decrypt(char *input, char *output, int shift);
+
+/**
+ * Main function to demonstrate shift cipher encryption and decryption.
+ *
+ * Summary:
+ *   - Prompts the user to enter a string and a shift value.
+ *   - Encrypts the string using the shift cipher and displays the result.
+ *   - Decrypts the encrypted string and displays the original string.
+ */
+int main();
 #include <stdio.h>
 #include <string.h>
 
